@@ -1,0 +1,18 @@
+# Build artifacts
+.build/
+DerivedData/
+
+# Xcode specific files
+*.xcodeproj
+*.xcworkspace
+*.xcuxserstate
+*/project.xcworkspace
+*/xcuserdata
+*project.pbxproj
+
+# Swift Package Manager specific
+Packages/
+.package/
+
+# User-specific files
+*.swiftpm/xcode/xcuserdata/
