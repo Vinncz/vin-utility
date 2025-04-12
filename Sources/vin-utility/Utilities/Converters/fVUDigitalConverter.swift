@@ -1,6 +1,6 @@
 import Foundation
 
-enum VUDigitalUnit {
+public enum VUDigitalUnit {
     
     case bit, byte
     
@@ -76,7 +76,7 @@ enum VUDigitalUnit {
 }
 
 /// Converts the given value from some DigialUnit into a different DigitalUnit.
-func VUDigitallyConvert ( _ beforeConversionAmount: Double, from beforeConversionUnit: VUDigitalUnit, to afterConversionUnit: VUDigitalUnit ) -> VUDigitalConversionResult {
+public func VUDigitallyConvert ( _ beforeConversionAmount: Double, from beforeConversionUnit: VUDigitalUnit, to afterConversionUnit: VUDigitalUnit ) -> VUDigitalConversionResult {
     let baseInBits = beforeConversionAmount * beforeConversionUnit.factor
     return VUDigitalConversionResult (
         initialUnit: beforeConversionUnit, 
@@ -86,7 +86,7 @@ func VUDigitallyConvert ( _ beforeConversionAmount: Double, from beforeConversio
 }
 
 
-struct VUDigitalConversionResult {
+public struct VUDigitalConversionResult {
     
     let initialUnit: VUDigitalUnit
     let destinationUnit: VUDigitalUnit
@@ -96,7 +96,7 @@ struct VUDigitalConversionResult {
         destinationUnit.symbol
     }
     
-    func formatted ( precision: Int = 2, withSymbol: Bool = false ) -> String {
+    public func formatted ( precision: Int = 2, withSymbol: Bool = false ) -> String {
         String(format: "%.\(precision)f \(withSymbol ? unitSymbol : "")", value)
     }
     
@@ -104,7 +104,7 @@ struct VUDigitalConversionResult {
 
 
 /// Converts the given value to the most reasonable unit. 
-func VUAutoConvert ( _ value: Double, from unit: VUDigitalUnit, useBinary: Bool = false ) -> VUDigitalConversionResult {
+public func VUAutoConvert ( _ value: Double, from unit: VUDigitalUnit, useBinary: Bool = false ) -> VUDigitalConversionResult {
     let baseInBits = value * unit.factor
 
     let targetUnits: [VUDigitalUnit] = useBinary

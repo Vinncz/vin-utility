@@ -1,8 +1,8 @@
 import Foundation
 
-internal struct VUHTTP {
+public struct VUHTTP {
     
-    enum Method : String {
+    public enum Method : String {
         case GET, PATCH, POST, PUT, DELETE
     }
     
@@ -11,11 +11,11 @@ internal struct VUHTTP {
 
 extension VUHTTP {
     
-    struct Parameter {
+    public struct Parameter {
         let key   : String
         let value : String
         
-        struct Encoder {
+        public struct Encoder {
             public init () {}
             
             public func encodeParameters ( for urlRequest: inout URLRequest, with parameters: [Parameter] ) throws {
@@ -38,7 +38,7 @@ extension VUHTTP {
 
 extension VUHTTP {
     
-    enum Header {
+    public enum Header {
         case accept          (MediaType)
         case acceptCharset   (String)
         case acceptEncoding  (String)
@@ -56,7 +56,7 @@ extension VUHTTP {
         case userAgent       (String)
         case custom          (key: String, value: String)
         
-        var key: String {
+        public var key: String {
             switch self {
                 case .accept             : return "Accept"
                 case .acceptCharset      : return "Accept-Charset"
@@ -77,7 +77,7 @@ extension VUHTTP {
             }
         }
         
-        var value: String {
+        public var value: String {
             switch self {
                 case .accept(let accept)                : return accept.value
                 case .acceptCharset(let value)          : return value
@@ -98,7 +98,7 @@ extension VUHTTP {
             }
         }
         
-        var unwrapped: (Dictionary<String, Any>.Key, Dictionary<String, Any>.Value) {
+        public var unwrapped: (Dictionary<String, Any>.Key, Dictionary<String, Any>.Value) {
             (self.key, self.value)
         }
     }
@@ -108,7 +108,7 @@ extension VUHTTP {
 
 extension VUHTTP {
     
-    enum ResponseError : Error {
+    public enum ResponseError : Error {
         case unknown
         case noURL
         case couldNotParse
@@ -138,7 +138,7 @@ extension VUHTTP {
         case formUrlEncoded
         case custom(String)
         
-        var value: String {
+        public var value: String {
             switch self {
                 case .json              : return "application/json"
                 case .xml               : return "application/xml"
@@ -152,7 +152,7 @@ extension VUHTTP {
         case bearer(String)
         case custom(String)
         
-        var value: String {
+        public var value: String {
             switch self {
                 case .bearer(let value) : return "Bearer \(value)"
                 case .custom(let value) : return value
@@ -160,7 +160,7 @@ extension VUHTTP {
         }
     }
     
-    struct HeaderEncoder {
+    public struct HeaderEncoder {
         public init () {}
         
         public func encodeHeaders ( for urlRequest: inout URLRequest, with headers: [Header] ) {

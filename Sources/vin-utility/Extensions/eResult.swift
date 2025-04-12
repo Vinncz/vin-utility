@@ -1,6 +1,6 @@
 import Foundation
 
-extension Result {
+public extension Result {
     
     
     /// Returns the success value, or the given default should the outcome is a failure.

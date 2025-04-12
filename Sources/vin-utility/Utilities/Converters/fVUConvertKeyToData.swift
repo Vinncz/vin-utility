@@ -2,7 +2,7 @@ import Foundation
 import os
 import Security
 
-func VUConvertKeyToData(_ inputKey: SecKey) -> Result<Data, Error> {
+public func VUConvertKeyToData(_ inputKey: SecKey) -> Result<Data, Error> {
     
     var error: Unmanaged<CFError>?
     let externalRep = SecKeyCopyExternalRepresentation(inputKey, &error)

@@ -2,23 +2,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "vin-utility",
+    name: "VinUtility",
     platforms: [
         .macOS(.v14),
         .iOS(.v17)
     ],
     products: [
         .library(
-            name: "vin-utility",
-            targets: ["vin-utility"]),
+            name: "VinUtility",
+            targets: ["VinUtility"]),
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "vin-utility",
+            name: "VinUtility",
             dependencies: []),
         .testTarget(
-            name: "vin-utilityTests",
-            dependencies: ["vin-utility"]),
+            name: "VinUtilityTests",
+            dependencies: ["VinUtility"]),
     ]
 )

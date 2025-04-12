@@ -1,7 +1,7 @@
 #if os(iOS)
 import UIKit
 
-func VUPresentLoadingAlert(on viewController: UIViewController?, title: String, message: String, cancelButtonCTA: String, delay: TimeInterval, cancelAction: (() -> Void)?) {
+public func VUPresentLoadingAlert(on viewController: UIViewController?, title: String, message: String, cancelButtonCTA: String, delay: TimeInterval, cancelAction: (() -> Void)?) {
     let alert = UIAlertController(title: title, message: "\(message)\n\n\n", preferredStyle: .alert)
 
     let cancelAction = UIAlertAction(title: cancelButtonCTA, style: .cancel) { _ in cancelAction?() }
@@ -26,9 +26,9 @@ func VUPresentLoadingAlert(on viewController: UIViewController?, title: String, 
     }
 }
 
-fileprivate class PreviewController: UIViewController {
+public class PreviewController: UIViewController {
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
             VUPresentLoadingAlert(on: self, 
@@ -48,7 +48,7 @@ fileprivate class PreviewController: UIViewController {
 #elseif os(macOS)
 import AppKit
 
-func VUPresentLoadingAlert(on viewController: NSViewController?, title: String, message: String, cancelButtonCTA: String, delay: TimeInterval, cancelAction: (() -> Void)?) {
+public func VUPresentLoadingAlert(on viewController: NSViewController?, title: String, message: String, cancelButtonCTA: String, delay: TimeInterval, cancelAction: (() -> Void)?) {
     let alert = NSAlert()
     alert.messageText = title
     alert.informativeText = "\(message)\n\n\n"
@@ -84,9 +84,9 @@ func VUPresentLoadingAlert(on viewController: NSViewController?, title: String, 
     }
 }
 
-fileprivate class PreviewController: NSViewController {
+public class PreviewController: NSViewController {
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             VUPresentLoadingAlert(on: self, 

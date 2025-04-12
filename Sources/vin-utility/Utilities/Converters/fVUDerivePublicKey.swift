@@ -17,7 +17,7 @@ struct DERIVATION_ERROR: LocalizedError {
     }
 }
 
-func VUDerivePublicKey(fromPrivateKey privateKey: SecKey) -> Result<SecKey, Error> {
+public func VUDerivePublicKey(fromPrivateKey privateKey: SecKey) -> Result<SecKey, Error> {
     let publicKey = SecKeyCopyPublicKey(privateKey)
     
     if let publicKey {

@@ -5,7 +5,7 @@ import SwiftUI
 import UIKit
 
 @available(iOS 17.0, *)
-class VUScannerViewController : UIViewController {
+public class VUScannerViewController : UIViewController {
     
     var captureSession  = AVCaptureSession()
     
@@ -26,7 +26,7 @@ class VUScannerViewController : UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLayoutSubviews () {
+    override public func viewDidLayoutSubviews () {
         super.viewDidLayoutSubviews()
         
         if let previewLayer = previewLayer {
@@ -34,7 +34,7 @@ class VUScannerViewController : UIViewController {
         }
     }
     
-    override func viewDidLoad () {
+    override public func viewDidLoad () {
         super.viewDidLoad()
         
         var captureDevice: AVCaptureDevice?
@@ -100,7 +100,7 @@ import SwiftUI
 import AppKit
 
 @available(macOS 14.0, *)
-class VUScannerViewController: NSViewController {
+public class VUScannerViewController: NSViewController {
 
     var captureSession  = AVCaptureSession()
     var previewLayer    : AVCaptureVideoPreviewLayer? = nil
@@ -119,11 +119,11 @@ class VUScannerViewController: NSViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func loadView() {
+    override public func loadView() {
         self.view = NSView()  // The root view for this controller
     }
 
-    override func viewDidLayout() {
+    override public func viewDidLayout() {
         super.viewDidLayout()
 
         if let previewLayer = previewLayer {
@@ -131,7 +131,7 @@ class VUScannerViewController: NSViewController {
         }
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         var captureDevice: AVCaptureDevice?

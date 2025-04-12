@@ -1,9 +1,9 @@
 import Foundation
 import os
 
-struct VULogger {
+public struct VULogger {
     
-    static func log (
+    static public func log (
         tag      : VULogTag = .log, 
         _ items  : Any...,
         file     : String = #file,
@@ -47,7 +47,7 @@ struct VULogger {
     
 }
 
-enum VULogTag {
+public enum VULogTag {
     
     case critical
     case error
@@ -58,7 +58,7 @@ enum VULogTag {
     case simOnly
     case log
     
-    func label(category: String = "") -> String {
+    public func label(category: String = "") -> String {
         switch self {
             case .critical: return "🚨 CRITICAL-- \(category)"
             case .error   : return "🔴 ERROR-- \(category)"

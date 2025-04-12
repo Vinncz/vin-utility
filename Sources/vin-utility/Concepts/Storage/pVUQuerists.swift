@@ -1,15 +1,17 @@
 import Foundation
 
 
+
 /// The base type for all `Querist` type.
-protocol VUQuerist {}
+public protocol VUQuerist {}
+
 
 
 /// Set of requirements for a type that fabricates some data and places it into a storage.
-protocol VUFabricatorQuerist<FabricatorKey, FabricatorArgument, FabricatorReturnValue, FabricatorFault>: VUPlacerQuerist {
+public protocol VUFabricatorQuerist<FabricatorKey, FabricatorArgument, FabricatorReturnValue, FabricatorFault>: VUPlacerQuerist {
     
     
-    /// Protocol conformance.
+    /// Protocol conformances.
     associatedtype FabricatorKey
     associatedtype FabricatorArgument
     associatedtype FabricatorReturnValue
@@ -23,11 +25,12 @@ protocol VUFabricatorQuerist<FabricatorKey, FabricatorArgument, FabricatorReturn
 }
 
 
+
 /// Set of requirements for a type that places data into a storage.
-protocol VUPlacerQuerist<PlacerKey, PlacerInputValue, PlacerReturnValue, PlacerFault>: VUQuerist {
+public protocol VUPlacerQuerist<PlacerKey, PlacerInputValue, PlacerReturnValue, PlacerFault>: VUQuerist {
     
     
-    /// Protocol conformance.
+    /// Protocol conformances.
     associatedtype PlacerKey
     associatedtype PlacerInputValue
     associatedtype PlacerReturnValue
@@ -41,11 +44,12 @@ protocol VUPlacerQuerist<PlacerKey, PlacerInputValue, PlacerReturnValue, PlacerF
 }
 
 
+
 /// Set of requirements for a type that removes data from a storage.
-protocol VURemoverQuerist<RemoverKey, RemoverReturnValue, RemoverFault>: VUQuerist {
+public protocol VURemoverQuerist<RemoverKey, RemoverReturnValue, RemoverFault>: VUQuerist {
     
     
-    /// Protocol conformance.
+    /// Protocol conformances.
     associatedtype RemoverKey
     associatedtype RemoverReturnValue
     associatedtype RemoverFault: Error
@@ -58,11 +62,12 @@ protocol VURemoverQuerist<RemoverKey, RemoverReturnValue, RemoverFault>: VUQueri
 }
 
 
+
 /// Set of requirements for a type that checks the presence of a key and retrieves data from a storage.
-protocol VURetrieverQuerist<RetrieverKey, RetrieverReturnValue, RetrieverFault>: VUQuerist {
+public protocol VURetrieverQuerist<RetrieverKey, RetrieverReturnValue, RetrieverFault>: VUQuerist {
     
     
-    /// Protocol conformance.
+    /// Protocol conformances.
     associatedtype RetrieverKey
     associatedtype RetrieverReturnValue
     associatedtype RetrieverFault: Error

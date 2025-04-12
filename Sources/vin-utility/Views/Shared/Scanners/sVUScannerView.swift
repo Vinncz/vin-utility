@@ -5,14 +5,14 @@ import os
 import SwiftUI
 
 @available(iOS 17.0, *)
-struct VUScannerView : VUConfigurable, UIViewControllerRepresentable {
+public struct VUScannerView : VUConfigurable, UIViewControllerRepresentable {
     
-    var isScanning: Binding<Bool>?
-    var config  : confdt
-    var callback: ((String) -> Void)?
-    var error   : Binding<String>?
+    public var isScanning: Binding<Bool>?
+    public var config  : confdt
+    public var callback: ((String) -> Void)?
+    public var error   : Binding<String>?
     
-    init ( 
+    public init ( 
         _ incomingConfig: confdt = [:], 
           error         : Binding<String>?, 
           isScanning    : Binding<Bool>?,
@@ -25,18 +25,18 @@ struct VUScannerView : VUConfigurable, UIViewControllerRepresentable {
         self.config = VUMergeDictionaries(defaultConfig, incomingConfig)
     }
     
-    func makeUIViewController ( context: Context ) -> VUScannerViewController {
+    public func makeUIViewController ( context: Context ) -> VUScannerViewController {
         let controller      = VUScannerViewController(config, error: error)
         controller.delegate = context.coordinator
         
         return controller
     }
     
-    func makeCoordinator () -> Coordinator {
+    public func makeCoordinator () -> Coordinator {
         Coordinator(config, error, callback)
     }
     
-    func updateUIViewController ( _ uiViewController: VUScannerViewController, context: Context ) {
+    public func updateUIViewController ( _ uiViewController: VUScannerViewController, context: Context ) {
         if let isScanning {
             isScanning.wrappedValue ? 
                 DispatchQueue.global().async { uiViewController.captureSession.startRunning() }
@@ -55,7 +55,7 @@ struct VUScannerView : VUConfigurable, UIViewControllerRepresentable {
 @available(iOS 17.0, *)
 extension VUScannerView {
     
-    class Coordinator : NSObject, AVCaptureMetadataOutputObjectsDelegate {
+    public class Coordinator : NSObject, AVCaptureMetadataOutputObjectsDelegate {
         var config  : confdt
         var callback: ((String) -> Void)?
         var error   : Binding<String>?
@@ -73,7 +73,7 @@ extension VUScannerView {
             self.callback = callback
         }
         
-        func metadataOutput (
+        public func metadataOutput (
             _         output         : AVCaptureMetadataOutput, 
             didOutput metadataObjects: [AVMetadataObject], 
             from      connection     : AVCaptureConnection
@@ -114,9 +114,9 @@ extension VUScannerView {
 }
 
 @available(iOS 17.0, *)
-extension VUScannerView {
+public extension VUScannerView {
     
-    enum CaptureMode {
+    public enum CaptureMode {
         case singleScan
         case continuous
     }
@@ -124,9 +124,9 @@ extension VUScannerView {
 }
 
 @available(iOS 17.0, *)
-extension VUScannerView {
+public extension VUScannerView {
     
-    enum Config {
+    public enum Config {
         case captureMode
         case debounce
         case cameraPriority
@@ -145,14 +145,14 @@ import SwiftUI
 import AppKit
 
 @available(macOS 14.0, *)
-struct VUScannerView: VUConfigurable, NSViewControllerRepresentable {
+public struct VUScannerView: VUConfigurable, NSViewControllerRepresentable {
 
-    var isScanning: Binding<Bool>?
-    var config: confdt
-    var callback: ((String) -> Void)?
-    var error: Binding<String>?
+    public var isScanning: Binding<Bool>?
+    public var config: confdt
+    public var callback: ((String) -> Void)?
+    public var error: Binding<String>?
 
-    init(
+    public init(
         _ incomingConfig: confdt = [:],
         error: Binding<String>?,
         isScanning: Binding<Bool>?,
@@ -164,17 +164,17 @@ struct VUScannerView: VUConfigurable, NSViewControllerRepresentable {
         self.config = VUMergeDictionaries(defaultConfig, incomingConfig)
     }
 
-    func makeNSViewController(context: Context) -> VUScannerViewController {
+    public func makeNSViewController(context: Context) -> VUScannerViewController {
         let controller = VUScannerViewController(config, error: error)
         controller.delegate = context.coordinator
         return controller
     }
 
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         return Coordinator(config, error, callback)
     }
 
-    func updateNSViewController(_ nsViewController: VUScannerViewController, context: Context) {
+    public func updateNSViewController(_ nsViewController: VUScannerViewController, context: Context) {
         if let isScanning {
             isScanning.wrappedValue ?
                 DispatchQueue.global().async { nsViewController.captureSession.startRunning() }
@@ -193,15 +193,15 @@ struct VUScannerView: VUConfigurable, NSViewControllerRepresentable {
 @available(macOS 14.0, *)
 extension VUScannerView {
 
-    class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
-        var config: confdt
-        var callback: ((String) -> Void)?
-        var error: Binding<String>?
+    public class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+        public var config: confdt
+        public var callback: ((String) -> Void)?
+        public var error: Binding<String>?
 
-        var lastExecution: Date = .distantPast
-        var hasBeenExecuted: Bool = false
+        public var lastExecution: Date = .distantPast
+        public var hasBeenExecuted: Bool = false
 
-        init(
+        public init(
             _ config: confdt,
             _ error: Binding<String>?,
             _ callback: ((String) -> Void)?
@@ -211,7 +211,7 @@ extension VUScannerView {
             self.callback = callback
         }
 
-        func metadataOutput(
+        public func metadataOutput(
             _ output: AVCaptureMetadataOutput,
             didOutput metadataObjects: [AVMetadataObject],
             from connection: AVCaptureConnection
@@ -253,7 +253,7 @@ extension VUScannerView {
 }
 
 @available(macOS 14.0, *)
-extension VUScannerView {
+public extension VUScannerView {
 
     enum CaptureMode {
         case singleScan
@@ -263,7 +263,7 @@ extension VUScannerView {
 }
 
 @available(macOS 14.0, *)
-extension VUScannerView {
+public extension VUScannerView {
 
     enum Config {
         case captureMode

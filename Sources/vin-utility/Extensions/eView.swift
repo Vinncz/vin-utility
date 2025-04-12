@@ -6,7 +6,7 @@ import UIKit
 #endif
 
 
-extension View {
+public extension View {
     
     func border ( _ edges: Edge.Set, _ color: Color, girth: CGFloat ) -> some View {
         overlay (
@@ -29,13 +29,13 @@ extension View {
     
 }
 
-struct EdgeBorder : View {
+public struct EdgeBorder : View {
     
-    let edges : Edge.Set
-    let color : Color
-    let girth : CGFloat
+    public let edges : Edge.Set
+    public let color : Color
+    public let girth : CGFloat
 
-    var body : some View {
+    public var body : some View {
         GeometryReader { geometry in
             ZStack {
                 if edges.contains(.top) {

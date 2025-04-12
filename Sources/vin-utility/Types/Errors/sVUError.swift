@@ -1,49 +1,63 @@
 import Foundation
 
 
-/// Represents an error that happened inside the FixPro Mobile application.
-struct VUError: LocalizedError {
+
+/// A descriptive error.
+public struct VUError: LocalizedError {
     
     
-    /// A unique code. Uniquely identifies one error from another; 
-    /// when they came from the same domain.
-    let code: Int
+    /// A unique name. Uniquely identifies one error from another within the same domain.
+    public let name: String
+    
+    
+    /// A unique code. Uniquely identifies one error from another within the same domain.
+    public let code: Int
     
     
     /// Identifies where the error comes from.
-    let domain: VUErrorDomain
+    public let domain: VUErrorDomain
     
     
     /// A dictionary containing additional information regarding what went wrong.
-    let userInfo: [String: Any]
+    public let userInfo: [String: Any]
+    
+    
+    /// Creates a new error.
+    public init(name: String, code: Int, domain: VUErrorDomain, userInfo: [String: Any]) {
+        self.name = name
+        self.code = code
+        self.domain = domain
+        self.userInfo = userInfo
+    }
     
     
     /// General, human-readable summary of what went wrong.
     /// Targetted for end users, it sums the problem up that answers most of their question.
-    var errorDescription: String? {
+    public var errorDescription: String? {
         return userInfo[NSLocalizedDescriptionKey] as? String
     }
     
     
     /// A somewhat comprehensive, technical statement about why it went wrong.
     /// Targetted for developers or savvy individuals, it should tips them to where the cause lies.
-    var failureReason: String? {
+    public var failureReason: String? {
         return userInfo[NSLocalizedFailureReasonErrorKey] as? String
     }
     
     
     /// A hint or probable way to solve the problem.
     /// Targeted for end users.
-    var recoverySuggestion: String? {
+    public var recoverySuggestion: String? {
         return userInfo[NSLocalizedRecoverySuggestionErrorKey] as? String
     }
     
 }
 
 
+
 extension VUError: Equatable {
     
-    static func == (lhs: VUError, rhs: VUError) -> Bool {
+    public static func == (lhs: VUError, rhs: VUError) -> Bool {
         lhs.code == rhs.code
         && lhs.domain == rhs.domain
     }
@@ -51,14 +65,19 @@ extension VUError: Equatable {
 }
 
 
-extension VUError {    
+
+public extension VUError {
     
     
-    /// A generic error. Little is known about what or where it went wrong.
-    static let UNKNOWN: VUError = .init(
-        code: 37,
+    static let UNKNOWN = VUError(
+        name: "UNKNOWN_ERROR",
+        code: 0b0010_0101,
         domain: .Miscellaneous,
-        userInfo: [:]
+        userInfo: [
+            NSLocalizedDescriptionKey: "An unknown error occurred.",
+            NSLocalizedFailureReasonErrorKey: "An unknown error occurred.",
+            NSLocalizedRecoverySuggestionErrorKey: "Review the logs for more information.",
+        ]
     )
     
 }

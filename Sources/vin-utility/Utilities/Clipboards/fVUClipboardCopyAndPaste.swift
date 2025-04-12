@@ -4,7 +4,7 @@ import Foundation
 import AppKit
 
 /// Copy the specified content to the clipboard.
-func VUCopyToClipboard(_ input: Any) -> Bool {
+@discardableResult public func VUCopyToClipboard(_ input: Any) -> Bool {
     let pasteboard = NSPasteboard.general
     pasteboard.clearContents()
 
@@ -28,7 +28,7 @@ func VUCopyToClipboard(_ input: Any) -> Bool {
 }
 
 /// Paste content from the clipboard.
-func VUPasteFromClipboard() -> Any? {
+public func VUPasteFromClipboard() -> Any? {
     let pasteboard = NSPasteboard.general
 
     if let string = pasteboard.string(forType: .string) {
@@ -53,7 +53,7 @@ func VUPasteFromClipboard() -> Any? {
 import UIKit
 
 /// Copy the specified content to the clipboard.
-func VUCopyToClipboard(_ input: Any) -> Bool {
+@discardableResult public func VUCopyToClipboard(_ input: Any) -> Bool {
     let pasteboard = UIPasteboard.general
 
     if let string = input as? String {
@@ -78,7 +78,7 @@ func VUCopyToClipboard(_ input: Any) -> Bool {
 }
 
 /// Paste content from the clipboard.
-func VUPasteFromClipboard() -> Any? {
+public func VUPasteFromClipboard() -> Any? {
     let pasteboard = UIPasteboard.general
 
     if let string = pasteboard.string {

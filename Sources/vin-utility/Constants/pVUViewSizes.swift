@@ -1,7 +1,9 @@
 import Foundation
 
+
+
 /// A collection of values that represents one axis of a size, in accordance with IBM's Carbon Design System.
-indirect enum VUViewSize : VUAssociableWithValue {
+indirect public enum VUViewSize : VUAssociableWithValue {
     
     
     /// Represents the an infinitely small size.
@@ -56,7 +58,8 @@ indirect enum VUViewSize : VUAssociableWithValue {
     case composite (VUViewSize)
     
     
-    var val: CGFloat {
+    /// Associated value of the size.
+    public var val: CGFloat {
         switch self {
             case .none      : return 0
             case .xxxSmall  : return 1
@@ -77,7 +80,7 @@ indirect enum VUViewSize : VUAssociableWithValue {
 }
 
 /// Extension for set sizes of icons.
-extension VUViewSize {
+public extension VUViewSize {
     
     
     /// Used for sizing icons. Equates to ``VUViewSize/medium``.
@@ -101,8 +104,10 @@ extension VUViewSize {
     
 }
 
+
+
 /// Extensions for set sizes of container breakpoints.
-extension VUViewSize {
+public extension VUViewSize {
     
     
     /// Used as width-clamping constants. Equates to 393 points.
@@ -118,44 +123,56 @@ extension VUViewSize {
     
 }
 
+
+
+/// Conformance to `AdditiveArithmetic` public protocol.
 extension VUViewSize : AdditiveArithmetic {
     
     
-    static var zero: VUViewSize {
+    /// Represents 0 points of size in some axis.
+    public static var zero: VUViewSize {
         return .none
     }
     
     
-    static func + (lhs: VUViewSize, rhs: VUViewSize) -> VUViewSize {
+    /// Adds two sizes together.
+    public static func + (lhs: VUViewSize, rhs: VUViewSize) -> VUViewSize {
         return .constant(lhs.val + rhs.val)
     }
     
     
-    static func - (lhs: VUViewSize, rhs: VUViewSize) -> VUViewSize {
+    /// Subtracts two sizes.
+    public static func - (lhs: VUViewSize, rhs: VUViewSize) -> VUViewSize {
         return .constant(lhs.val - rhs.val)
     }
     
 }
 
+
+
 extension VUViewSize {
     
     
-    static func * (lhs: VUViewSize, rhs: VUViewSize) -> VUViewSize {
+    /// Multiplies two sizes together.
+    public static func * (lhs: VUViewSize, rhs: VUViewSize) -> VUViewSize {
         return .constant(lhs.val * rhs.val)
     }
     
     
-    static func * (lhs: VUViewSize, rhs: CGFloat) -> VUViewSize {
+    /// Multiplies a size by a scalar.
+    public static func * (lhs: VUViewSize, rhs: CGFloat) -> VUViewSize {
         return .constant(lhs.val * rhs)
     }
     
     
-    static func / (lhs: VUViewSize, rhs: VUViewSize) -> VUViewSize {
+    /// Divides two sizes.
+    public static func / (lhs: VUViewSize, rhs: VUViewSize) -> VUViewSize {
         return .constant(lhs.val / rhs.val)
     }
     
     
-    static func / (lhs: VUViewSize, rhs: CGFloat) -> VUViewSize {
+    /// Divides a size by a scalar.
+    public static func / (lhs: VUViewSize, rhs: CGFloat) -> VUViewSize {
         return .constant(lhs.val / rhs)
     }
     
@@ -164,12 +181,12 @@ extension VUViewSize {
 extension VUViewSize : Equatable {
     
     
-    static func == (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
+    public static func == (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
         return lhs.val == rhs.val
     }
     
     
-    static func != (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
+    public static func != (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
         return lhs.val != rhs.val
     }
     
@@ -178,22 +195,22 @@ extension VUViewSize : Equatable {
 extension VUViewSize : Comparable {
     
     
-    static func < (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
+    public static func < (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
         return lhs.val < rhs.val
     }
     
     
-    static func > (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
+    public static func > (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
         return lhs.val > rhs.val
     }
     
     
-    static func <= (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
+    public static func <= (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
         return lhs.val <= rhs.val
     }
     
     
-    static func >= (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
+    public static func >= (lhs: VUViewSize, rhs: VUViewSize) -> Bool {
         return lhs.val >= rhs.val
     }
     
