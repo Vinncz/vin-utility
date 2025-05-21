@@ -5,7 +5,19 @@ import Foundation
 public extension VUError {
     
     
-    public static let NO_SUITABLE_CAMERA = VUError(
+    static func CaptureDeviceError(underlying error: Error) -> VUError {
+        .init(
+            name: "CAPTURE_DEVICE_ERROR", 
+            code: 0b1100_0000, 
+            domain: .CaptureDevice, 
+            userInfo: [
+                NSUnderlyingErrorKey: error
+            ]
+        )
+    }
+    
+    
+    static let NO_SUITABLE_CAMERA = VUError(
         name: "NO_SUITABLE_CAMERA",
         code: 0b1100_0010, 
         domain: .CaptureDevice, 
@@ -17,7 +29,7 @@ public extension VUError {
     )
     
     
-    public static let NO_SUITABLE_MICROPHONE = VUError(
+    static let NO_SUITABLE_MICROPHONE = VUError(
         name: "NO_SUITABLE_MICROPHONE",
         code: 0b1100_0001, 
         domain: .CaptureDevice, 
@@ -29,7 +41,7 @@ public extension VUError {
     )
     
     
-    public static let NO_PERMISSION_CAMERA = VUError(
+    static let NO_PERMISSION_CAMERA = VUError(
         name: "NO_PERMISSION_CAMERA",
         code: 0b1000_0010, 
         domain: .CaptureDevice, 
@@ -41,7 +53,7 @@ public extension VUError {
     )
     
     
-    public static let NO_PERMISSION_MICROPHONE = VUError(
+    static let NO_PERMISSION_MICROPHONE = VUError(
         name: "NO_PERMISSION_MICROPHONE",
         code: 0b1000_0001, 
         domain: .CaptureDevice, 

@@ -2,7 +2,7 @@ import Foundation
 
 
 
-/// A saved, serialized state of an object for a moment in time.
+/// A saved, serialized, state of an object at a moment in time.
 public protocol VUMementoSnapshot: Codable {
     
     
@@ -19,6 +19,6 @@ public protocol VUMementoSnapshot: Codable {
     
     
     /// The version of the object at the time of the snapshot.
-    var version: String? { get }
+    var version: String? { get set }
     
 }

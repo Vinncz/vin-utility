@@ -3,7 +3,7 @@ import Foundation
 
 
 /// A descriptive error.
-public struct VUError: LocalizedError {
+public struct VUError: LocalizedError, CustomDebugStringConvertible {
     
     
     /// A unique name. Uniquely identifies one error from another within the same domain.
@@ -49,6 +49,16 @@ public struct VUError: LocalizedError {
     /// Targeted for end users.
     public var recoverySuggestion: String? {
         return userInfo[NSLocalizedRecoverySuggestionErrorKey] as? String
+    }
+    
+    
+    /// A debuggable representation of self.
+    public var debugDescription: String {
+        """
+        
+        [\(code)] \(name) • \(domain) • \(failureReason ?? "UNKNOWN REASON")
+        \(recoverySuggestion ?? "NOTHING TO SUGGEST")
+        """
     }
     
 }

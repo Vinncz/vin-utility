@@ -116,7 +116,7 @@ extension VUScannerView {
 @available(iOS 17.0, *)
 public extension VUScannerView {
     
-    public enum CaptureMode {
+    enum CaptureMode {
         case singleScan
         case continuous
     }
@@ -126,7 +126,7 @@ public extension VUScannerView {
 @available(iOS 17.0, *)
 public extension VUScannerView {
     
-    public enum Config {
+    enum Config {
         case captureMode
         case debounce
         case cameraPriority

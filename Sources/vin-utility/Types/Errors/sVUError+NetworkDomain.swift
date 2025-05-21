@@ -5,7 +5,19 @@ import Foundation
 public extension VUError {
     
     
-    public static let NO_NETWORK = VUError(
+    static func NetworkDomainError(underlying error: Error) -> VUError {
+        .init(
+            name: "NETWORK_DOMAIN_ERROR", 
+            code: 0b1000_0000, 
+            domain: .Network, 
+            userInfo: [
+                NSUnderlyingErrorKey: error
+            ]
+        )
+    }
+    
+    
+    static let NO_NETWORK = VUError(
         name: "NO_NETWORK",
         code: 0b1000_0000,
         domain: .Network,
@@ -17,21 +29,21 @@ public extension VUError {
     )
     
     
-    public static let UNREACHABLE = VUError(
+    static let UNREACHABLE = VUError(
         name: "UNREACHABLE",
-        code: 0b1000_0001,
+        code: 0b1000_0000,
         domain: .Network,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Unreachable host.", comment: ""),
             NSLocalizedFailureReasonErrorKey: NSLocalizedString("The host is unreachable.", comment: ""),
-            NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("Check the host address, confirm that they are re online, then try again.", comment: "")
+            NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("Check the host address, confirm that they are online, then try again.", comment: "")
         ]
     )
     
     
-    public static let TIMEOUT = VUError(
+    static let TIMEOUT = VUError(
         name: "TIMEOUT",
-        code: 0b1000_0010,
+        code: 0b1000_0001,
         domain: .Network,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Request timed out.", comment: ""),
@@ -41,9 +53,9 @@ public extension VUError {
     )
     
     
-    public static let UNEXPECTED_RESPONSE = VUError(
+    static let UNEXPECTED_RESPONSE = VUError(
         name: "UNEXPECTED_RESPONSE",
-        code: 0b1000_0011,
+        code: 0b1000_0010,
         domain: .Network,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Server gave response in unexpected format.", comment: ""),
@@ -53,9 +65,9 @@ public extension VUError {
     )
     
     
-    public static let SERVER_ERROR = VUError(
+    static let SERVER_ERROR = VUError(
         name: "SERVER_ERROR",
-        code: 0b1000_0100,
+        code: 0b1000_0011,
         domain: .Network,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Server error.", comment: ""),
@@ -65,9 +77,9 @@ public extension VUError {
     )
     
     
-    public static let UNAUTHENTICATED = VUError(
+    static let UNAUTHENTICATED = VUError(
         name: "UNAUTHENTICATED",
-        code: 0b1000_0101, 
+        code: 0b1000_0100, 
         domain: .Network, 
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Unauthenticated.", comment: ""),
@@ -77,9 +89,9 @@ public extension VUError {
     )
     
     
-    public static let FORBIDDEN = VUError(
+    static let FORBIDDEN = VUError(
         name: "FORBIDDEN",
-        code: 0b1000_0110, 
+        code: 0b1000_0101, 
         domain: .Network, 
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Forbidden.", comment: ""),
@@ -89,9 +101,9 @@ public extension VUError {
     )
     
     
-    public static let NOT_FOUND = VUError(
+    static let NOT_FOUND = VUError(
         name: "NOT_FOUND",
-        code: 0b1000_0111, 
+        code: 0b1000_0110, 
         domain: .Network, 
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Not found.", comment: ""),
@@ -101,9 +113,9 @@ public extension VUError {
     )
     
     
-    public static let INVALID_ADDRESS = VUError(
+    static let INVALID_ADDRESS = VUError(
         name: "INVALID_ADDRESS",
-        code: 0b1000_1000, 
+        code: 0b1000_0111, 
         domain: .Network, 
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Address is incorrectly written.", comment: ""),
@@ -113,9 +125,9 @@ public extension VUError {
     )
     
     
-    public static let BAD_REQUEST = VUError(
+    static let BAD_REQUEST = VUError(
         name: "BAD_REQUEST",
-        code: 0b1000_1001, 
+        code: 0b1000_1000, 
         domain: .Network, 
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Bad request.", comment: ""),
@@ -123,5 +135,30 @@ public extension VUError {
             NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("Check the request parameters, and try again.", comment: "")
         ]
     )
+    
+    
+    static let INVALID_TOKEN = VUError(
+        name: "INVALID_TOKEN",
+        code: 0b1000_1001, 
+        domain: .Network, 
+        userInfo: [
+            NSLocalizedDescriptionKey: NSLocalizedString("Invalid token.", comment: ""),
+            NSLocalizedFailureReasonErrorKey: NSLocalizedString("The token is invalid or expired.", comment: ""),
+            NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("Revalidate the token, then try again.", comment: "")
+        ]
+    )
+    
+    
+    static let CODE_ALREADY_EXCHANGED = VUError(
+        name: "CODE_ALREADY_EXCHANGED",
+        code: 0b1000_1010, 
+        domain: .Network, 
+        userInfo: [
+            NSLocalizedDescriptionKey: NSLocalizedString("Code already exchanged.", comment: ""),
+            NSLocalizedFailureReasonErrorKey: NSLocalizedString("The code has already been exchanged for tokens.", comment: ""),
+            NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString("Try again with a different code.", comment: "")
+        ]
+    )
+    
     
 }

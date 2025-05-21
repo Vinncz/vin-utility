@@ -8,11 +8,13 @@ import UIKit
 
 public extension View {
     
+    
     func border ( _ edges: Edge.Set, _ color: Color, girth: CGFloat ) -> some View {
         overlay (
             EdgeBorder(edges: edges, color: color, girth: girth)
         )
     }
+    
     
     #if canImport(UIKit)
     func keyboardDismissableByTappingNearlyAnywhere () -> some View {
@@ -31,10 +33,16 @@ public extension View {
 
 public struct EdgeBorder : View {
     
+    
     public let edges : Edge.Set
+    
+    
     public let color : Color
+    
+    
     public let girth : CGFloat
-
+    
+    
     public var body : some View {
         GeometryReader { geometry in
             ZStack {

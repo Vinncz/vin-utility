@@ -5,7 +5,19 @@ import Foundation
 public extension VUError {    
     
     
-    public static let DUPLICATE_ENTRY = VUError(
+    static func DataStorageDomainError(underlying error: Error) -> VUError {
+        .init(
+            name: "DATA_STORAGE_DOMAIN_ERROR", 
+            code: 0b0001_0000, 
+            domain: .DataStorage, 
+            userInfo: [
+                NSUnderlyingErrorKey: error
+            ]
+        )
+    }
+    
+    
+    static let DUPLICATE_ENTRY = VUError(
         name: "DUPLICATE_ENTRY",
         code: 0b0001_0001,
         domain: .DataStorage,
@@ -17,7 +29,7 @@ public extension VUError {
     )
     
     
-    public static let MISSING_ENTRY = VUError(
+    static let MISSING_ENTRY = VUError(
         name: "MISSING_ENTRY",
         code: 0b0001_0010,
         domain: .DataStorage,
@@ -29,7 +41,7 @@ public extension VUError {
     )
     
     
-    public static let UNLOADED_ENTRY = VUError(
+    static let UNLOADED_ENTRY = VUError(
         name: "UNLOADED_ENTRY",
         code: 0b0001_0011,
         domain: .DataStorage,
@@ -41,7 +53,7 @@ public extension VUError {
     )
     
     
-    public static let INVALID_ENTRY = VUError(
+    static let INVALID_ENTRY = VUError(
         name: "INVALID_ENTRY",
         code: 0b0001_0100,
         domain: .DataStorage,

@@ -1,11 +1,25 @@
 import Foundation
 
+
+
 public extension VUError {    
     
     
-    public static let DERIVATION_FAILURE = VUError(
+    static func CodableDomainError(underlying error: Error) -> VUError {
+        .init(
+            name: "CODABLE_DOMAIN_ERROR", 
+            code: 0b0100_0000, 
+            domain: .Codable, 
+            userInfo: [
+                NSUnderlyingErrorKey: error
+            ]
+        )
+    }
+    
+    
+    static let DERIVATION_FAILURE = VUError(
         name: "DERIVATION_FAILURE",
-        code: 0b0100_0000,
+        code: 0b0100_0001,
         domain: .Codable,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Unsuccessfully derived a value into some type.", comment: ""),
@@ -15,9 +29,9 @@ public extension VUError {
     )
     
     
-    public static let MALFORMED = VUError(
+    static let MALFORMED = VUError(
         name: "MALFORMED",
-        code: 0b0100_0001,
+        code: 0b0100_0010,
         domain: .Codable,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Keys which were expected or needed, were not found.", comment: ""),
@@ -27,9 +41,9 @@ public extension VUError {
     )
     
     
-    public static let TYPE_MISMATCH = VUError(
+    static let TYPE_MISMATCH = VUError(
         name: "TYPE_MISMATCH",
-        code: 0b0100_0010,
+        code: 0b0100_0011,
         domain: .Codable,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Type mismatch.", comment: ""),
@@ -38,9 +52,10 @@ public extension VUError {
         ]
     )
     
-    public static let PARSE_FAILURE = VUError(
+    
+    static let PARSE_FAILURE = VUError(
         name: "PARSE_FAILURE",
-        code: 0b0100_0011,
+        code: 0b0100_0100,
         domain: .Codable,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Failed to parse the object.", comment: ""),
@@ -50,9 +65,9 @@ public extension VUError {
     )
     
     
-    public static let ENCODE_FAILURE = VUError(
+    static let ENCODE_FAILURE = VUError(
         name: "ENCODE_FAILURE",
-        code: 0b0100_0100,
+        code: 0b0100_0101,
         domain: .Codable,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Failed to encode the object.", comment: ""),
@@ -62,9 +77,9 @@ public extension VUError {
     )
     
     
-    public static let DECODE_FAILURE = VUError(
+    static let DECODE_FAILURE = VUError(
         name: "DECODE_FAILURE",
-        code: 0b0100_0101,
+        code: 0b0100_0110,
         domain: .Codable,
         userInfo: [
             NSLocalizedDescriptionKey: NSLocalizedString("Failed to decode the object.", comment: ""),

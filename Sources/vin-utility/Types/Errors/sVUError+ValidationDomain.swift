@@ -5,7 +5,19 @@ import Foundation
 public extension VUError {
     
     
-    public static let EMPTY_ARGUMENT = VUError(
+    static func ValidationDomainError(underlying error: Error) -> VUError {
+        .init(
+            name: "VALIDATION_DOMAIN_ERROR", 
+            code: 0b0011_0000, 
+            domain: .Validation, 
+            userInfo: [
+                NSUnderlyingErrorKey: error
+            ]
+        )
+    }
+    
+    
+    static let EMPTY_ARGUMENT = VUError(
         name: "EMPTY_ARGUMENT",
         code: 0b0011_0000,
         domain: .Validation,
@@ -17,7 +29,7 @@ public extension VUError {
     )
     
     
-    public static let ILLEGAL_ARGUMENT = VUError(
+    static let ILLEGAL_ARGUMENT = VUError(
         name: "ILLEGAL_ARGUMENT",
         code: 0b0011_0001,
         domain: .Validation,
@@ -29,7 +41,7 @@ public extension VUError {
     )
     
     
-    public static let INCOMPLETE_ARGUMENT = VUError(
+    static let INCOMPLETE_ARGUMENT = VUError(
         name: "INCOMPLETE_ARGUMENT",
         code: 0b0011_0010,
         domain: .Validation,
@@ -41,7 +53,7 @@ public extension VUError {
     )
     
     
-    public static let INCOMPLETE_RECORDS = VUError(
+    static let INCOMPLETE_RECORDS = VUError(
         name: "INCOMPLETE_RECORDS",
         code: 0b0011_0011,
         domain: .Validation,
